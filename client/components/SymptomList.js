@@ -7,6 +7,9 @@ class SymptomList extends React.Component {
   render() {
     return (
       <select>
+        <option value="none" disabled selected>
+          Choose a symptom
+        </option>
         <option value="sore throat">Sore throat</option>
         <option value="itchy rash">Itchy rash</option>
         <option value="runny nose">Runny nose</option>
