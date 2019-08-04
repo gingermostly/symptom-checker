@@ -1,0 +1,16 @@
+{
+  "name": "symptom-checker-app",
+  "version": "1.0.0",
+  "description": "A simple tool for choosing a likely diagnosis based on user-selected symptoms along with report of symptom frequencies and diagnosis frequencies",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/index.js"
+  },
+  "author": "Ginger Barham",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^1.19.1"
+  }
+}
