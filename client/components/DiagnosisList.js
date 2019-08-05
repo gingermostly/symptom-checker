@@ -6,19 +6,13 @@ class DiagnosisList extends React.Component {
     super(props);
     this.state = {
       showAll: false,
+      topItem: null,
+      remainingDx: [],
     };
     this.handleYesClick = this.handleYesClick.bind(this);
     this.handleNoClick = this.handleNoClick.bind(this);
   }
-  handleYesClick() {
-    console.log('yes');
-  }
-  handleNoClick() {
-    this.setState({
-      showAll: true,
-    });
-  }
-  render() {
+  componentDidMount() {
     // sort list of diagnoses in descending order
     let sortedDx = this.props.dxList.slice(0).sort((a, b) => {
       if (a.reported < b.reported) {
@@ -36,14 +30,30 @@ class DiagnosisList extends React.Component {
     // pick random index from list of diagnoses if multiple of equal frequency
     let topDxIndex =
       filterDx.length > 1 ? Math.floor(Math.random() * filterDx.length) : 0;
+    console.log('topDxIndex', topDxIndex, sortedDx[topDxIndex]);
+    this.setState({
+      topItem: filterDx[topDxIndex],
+      remainingDx: sortedDx.filter((item, index) => index !== topDxIndex),
+    });
+  }
+  handleYesClick() {
+    console.log('yes');
+  }
+  handleNoClick() {
+    this.setState({
+      showAll: true,
+    });
+  }
+  render() {
+    console.log(this.topItem);
     if (this.props.dxList.length) {
       return (
         <div>
-          {!this.state.showAll ? (
+          {!this.state.showAll && this.state.topItem ? (
             <React.Fragment>
               <h1>Is this diagnosis accurate?</h1>
               <div>
-                {filterDx[topDxIndex].diagnosis}
+                {this.state.topItem.diagnosis}
                 <Confirm
                   onYes={this.handleYesClick}
                   onNo={this.handleNoClick}
@@ -52,9 +62,8 @@ class DiagnosisList extends React.Component {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              {sortedDx
-                .filter((item, index) => index !== topDxIndex)
-                .map(item => {
+              {this.state.remainingDx &&
+                this.state.remainingDx.map(item => {
                   return <div>{item.diagnosis}</div>;
                 })}
             </React.Fragment>
