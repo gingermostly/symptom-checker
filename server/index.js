@@ -14,12 +14,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', express.static(path.join(__dirname, '../public')));
 
 app.post('/api/symptom', (req, res) => {
-  console.log(req.body.symptom);
-  db.each(
+  console.log(req.body);
+  db.all(
     `select diagnosis from symptoms where symptom = "${req.body.symptom}"`,
     (err, row) => {
-      console.log(row);
+      if (err) {
+        console.log('error!');
+      }
+      res.send(row);
     }
   );
-  res.redirect('/');
+});
+
+app.get('/api/symptom', (req, res) => {
+  console.log(res.body);
 });

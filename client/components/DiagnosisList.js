@@ -4,10 +4,15 @@ class DiagnosisList extends React.Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
-    fetch('http://127.0.0.1:3000/api/dx').then(res => {
-      console.log(res.json);
-    });
+  render() {
+    return (
+      <div>
+        {this.props.dxList.map(item => {
+          return <div>{item.diagnosis}</div>;
+        })}
+      </div>
+    );
   }
-  render() {}
 }
+
+export default DiagnosisList;
