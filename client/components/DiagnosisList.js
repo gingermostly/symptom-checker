@@ -8,6 +8,7 @@ class DiagnosisList extends React.Component {
       showAll: false,
       topItem: null,
       remainingDx: [],
+      showReport: false,
     };
     this.handleYesClick = this.handleYesClick.bind(this);
     this.handleNoClick = this.handleNoClick.bind(this);
@@ -37,7 +38,9 @@ class DiagnosisList extends React.Component {
     });
   }
   handleYesClick() {
-    console.log('yes');
+    this.setState({
+      showReport: true,
+    });
   }
   handleNoClick() {
     this.setState({
@@ -49,7 +52,9 @@ class DiagnosisList extends React.Component {
     if (this.props.dxList.length) {
       return (
         <div>
-          {!this.state.showAll && this.state.topItem ? (
+          {!this.state.showAll &&
+          !this.state.showReport &&
+          this.state.topItem ? (
             <React.Fragment>
               <h1>Is this diagnosis accurate?</h1>
               <div>
@@ -60,12 +65,28 @@ class DiagnosisList extends React.Component {
                 />
               </div>
             </React.Fragment>
-          ) : (
+          ) : this.state.showAll && !this.state.showReport ? (
             <React.Fragment>
+              <h1>Please choose a diagnosis</h1>
               {this.state.remainingDx &&
                 this.state.remainingDx.map(item => {
                   return <div>{item.diagnosis}</div>;
                 })}
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <h1>Thank you!</h1>
+              <h2>
+                Here is a list of the number of reported diagnoses for your
+                symptom
+              </h2>
+              {this.props.dxList.map(item => {
+                return (
+                  <div>
+                    {item.diagnosis} {item.reported}
+                  </div>
+                );
+              })}
             </React.Fragment>
           )}
         </div>
