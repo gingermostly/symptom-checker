@@ -36,22 +36,30 @@ class SymptomList extends React.Component {
     });
   }
   render() {
-    return (
-      <div>
-        <form action="/api/symptom" method="POST" onSubmit={this.handleSubmit}>
-          <select name="symptom" onChange={this.handleChange}>
-            <option value="none" disabled selected>
-              Choose a symptom
-            </option>
-            <option value="sore throat">Sore throat</option>
-            <option value="itchy rash">Itchy rash</option>
-            <option value="runny nose">Runny nose</option>
-          </select>
-          <button type="submit">SUBMIT</button>
-        </form>
-        <DiagnosisList dxList={this.state.diagnoses} />
-      </div>
-    );
+    if (this.state.diagnoses.length) {
+      return <DiagnosisList dxList={this.state.diagnoses} />;
+    } else {
+      return (
+        <div>
+          <h1>What are your symptoms?</h1>
+          <form
+            action="/api/symptom"
+            method="POST"
+            onSubmit={this.handleSubmit}
+          >
+            <select name="symptom" onChange={this.handleChange}>
+              <option value="none" disabled selected>
+                Choose a symptom
+              </option>
+              <option value="sore throat">Sore throat</option>
+              <option value="itchy rash">Itchy rash</option>
+              <option value="runny nose">Runny nose</option>
+            </select>
+            <button type="submit">SUBMIT</button>
+          </form>
+        </div>
+      );
+    }
   }
 }
 

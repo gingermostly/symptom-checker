@@ -8,7 +8,6 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>What are your symptoms?</h1>
         <SymptomList />
       </div>
     );

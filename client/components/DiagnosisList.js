@@ -23,7 +23,12 @@ class DiagnosisList extends React.Component {
     let topDxIndex =
       filterDx.length > 1 ? Math.floor(Math.random() * filterDx.length) : 0;
     if (this.props.dxList.length) {
-      return <div>{filterDx[topDxIndex].diagnosis}</div>;
+      return (
+        <div>
+          <h1>Is this diagnosis accurate?</h1>
+          <div>{filterDx[topDxIndex].diagnosis}</div>
+        </div>
+      );
     } else {
       return null;
     }
