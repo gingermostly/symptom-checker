@@ -6,14 +6,17 @@ class SymptomList extends React.Component {
   }
   render() {
     return (
-      <select>
-        <option value="none" disabled selected>
-          Choose a symptom
-        </option>
-        <option value="sore throat">Sore throat</option>
-        <option value="itchy rash">Itchy rash</option>
-        <option value="runny nose">Runny nose</option>
-      </select>
+      <form action="/api/symptom" method="POST">
+        <select name="symptom">
+          <option value="none" disabled selected>
+            Choose a symptom
+          </option>
+          <option value="sore throat">Sore throat</option>
+          <option value="itchy rash">Itchy rash</option>
+          <option value="runny nose">Runny nose</option>
+        </select>
+        <button type="submit">SUBMIT</button>
+      </form>
     );
   }
 }
