@@ -14,9 +14,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', express.static(path.join(__dirname, '../public')));
 
 app.post('/api/symptom', (req, res) => {
-  console.log(req.body);
   db.all(
-    `select diagnosis from symptoms where symptom = "${req.body.symptom}"`,
+    `select diagnosis,reported from symptoms where symptom = "${
+      req.body.symptom
+    }"`,
     (err, row) => {
       if (err) {
         console.log('error!');
