@@ -1,5 +1,6 @@
 import * as React from 'react';
 import DiagnosisList from './DiagnosisList.js';
+import Confirm from './Confirm.js';
 
 class SymptomList extends React.Component {
   constructor(props) {
@@ -36,9 +37,16 @@ class SymptomList extends React.Component {
     });
   }
   render() {
+    // Display diagnosis list if symptom has been submitted
     if (this.state.diagnoses.length) {
-      return <DiagnosisList dxList={this.state.diagnoses} />;
+      return (
+        <div>
+          <DiagnosisList dxList={this.state.diagnoses} />
+          <Confirm />
+        </div>
+      );
     } else {
+      // if symptom not yet selected display selection form
       return (
         <div>
           <h1>What are your symptoms?</h1>
