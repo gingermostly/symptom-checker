@@ -1,8 +1,22 @@
 import * as React from 'react';
+import Confirm from './Confirm.js';
 
 class DiagnosisList extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showAll: false,
+    };
+    this.handleYesClick = this.handleYesClick.bind(this);
+    this.handleNoClick = this.handleNoClick.bind(this);
+  }
+  handleYesClick() {
+    console.log('yes');
+  }
+  handleNoClick() {
+    this.setState({
+      showAll: true,
+    });
   }
   render() {
     // sort list of diagnoses in descending order
@@ -25,8 +39,26 @@ class DiagnosisList extends React.Component {
     if (this.props.dxList.length) {
       return (
         <div>
-          <h1>Is this diagnosis accurate?</h1>
-          <div>{filterDx[topDxIndex].diagnosis}</div>
+          {!this.state.showAll ? (
+            <React.Fragment>
+              <h1>Is this diagnosis accurate?</h1>
+              <div>
+                {filterDx[topDxIndex].diagnosis}
+                <Confirm
+                  onYes={this.handleYesClick}
+                  onNo={this.handleNoClick}
+                />
+              </div>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              {sortedDx
+                .filter((item, index) => index !== topDxIndex)
+                .map(item => {
+                  return <div>{item.diagnosis}</div>;
+                })}
+            </React.Fragment>
+          )}
         </div>
       );
     } else {

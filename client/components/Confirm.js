@@ -4,11 +4,12 @@ class Confirm extends React.Component {
   constructor(props) {
     super(props);
   }
+
   render() {
     return (
       <div>
-        <button>YES</button>
-        <button>NO</button>
+        <button onClick={this.props.onYes}>YES</button>
+        <button onClick={this.props.onNo}>NO</button>
       </div>
     );
   }

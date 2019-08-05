@@ -1,6 +1,5 @@
 import * as React from 'react';
 import DiagnosisList from './DiagnosisList.js';
-import Confirm from './Confirm.js';
 
 class SymptomList extends React.Component {
   constructor(props) {
@@ -42,7 +41,6 @@ class SymptomList extends React.Component {
       return (
         <div>
           <DiagnosisList dxList={this.state.diagnoses} />
-          <Confirm />
         </div>
       );
     } else {
