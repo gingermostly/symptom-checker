@@ -20,7 +20,7 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "sqlite3": "^4.0.9",
-    "webpack-cli": "^3.3.6"
+    "webpack-cli": "^3.3.12"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
